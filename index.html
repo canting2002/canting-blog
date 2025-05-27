@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Canting's Blog</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 { color: #4CAF50; }
+    nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: #007bff;
+    }
+    nav a:hover { text-decoration: underline; }
+    #content {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Canting's Blog</h1>
+  <nav>
+    <a href="#" onclick="loadMarkdown('assignment1.md'); return false;">Assignment 1</a>
+    <a href="#" onclick="loadMarkdown('assignment2.md'); return false;">Assignment 2</a>
+    <a href="#" onclick="loadMarkdown('assignment3.md'); return false;">Assignment 3</a>
+    <a href="#" onclick="loadMarkdown('assignment4.md'); return false;">Assignment 4</a>
+  </nav>
+  <div id="content">点击上方链接以加载 Markdown 文件内容。</div>
+
+  <!-- 引入 marked.js -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    function loadMarkdown(file) {
+      fetch(file)
+        .then(res => res.text())
+        .then(md => {
+          document.getElementById('content').innerHTML = marked.parse(md);
+        })
+        .catch(err => {
+          document.getElementById('content').innerHTML =
+            '<p style="color:red;">无法加载文件：' + file + '</p>';
+        });
+    }
+  </script>
+</body>
+</html>
